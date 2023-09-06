@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=3 uid="uid://dx2h5wy3yssdn"]
+
+[ext_resource type="Texture2D" uid="uid://bderbrwvn45jp" path="res://art/enemyFlyingAlt_1.png" id="1_a3sob"]
+[ext_resource type="Script" path="res://scripts/mob.gd" id="1_yc31w"]
+[ext_resource type="Texture2D" uid="uid://c5huul0vygcra" path="res://art/enemyFlyingAlt_2.png" id="2_ss8cm"]
+[ext_resource type="Texture2D" uid="uid://dr1b7h1aann2y" path="res://art/enemySwimming_1.png" id="3_jqvi7"]
+[ext_resource type="Texture2D" uid="uid://3qgg4t45opbh" path="res://art/enemySwimming_2.png" id="4_cnk01"]
+[ext_resource type="Texture2D" uid="uid://c5msp5ls8fg17" path="res://art/enemyWalking_1.png" id="5_n8fi0"]
+[ext_resource type="Texture2D" uid="uid://dqqag2btcvvfh" path="res://art/enemyWalking_2.png" id="6_bdjxu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xs0r1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_a3sob")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ss8cm")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_jqvi7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_cnk01")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_n8fi0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_bdjxu")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 3.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a4xc2"]
+radius = 24.0
+height = 64.0
+
+[node name="Mob" type="RigidBody2D" groups=["mobs"]]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_yc31w")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_xs0r1")
+animation = &"walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_a4xc2")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
