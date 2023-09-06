@@ -5,7 +5,7 @@ var score
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	new_game()
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -15,19 +15,22 @@ func _process(delta):
 func game_over():
 	$ScoreTimer.stop()
 	$MobTimer.stop()
+	$Hub.show_game_over()
 	
 func new_game():
 	score = 0
 	$Player.start($StartPosition.position)
+	get_tree().call_group("mobs", "queue_free")
+	$Hub.update_score(score)
+	$Hub.show_message("Get Ready")
 	$StartTimer.start()
-
 
 func _on_mob_timer_timeout():
 	# Create a new instance of the Mob scene.
 	var mob = mob_scene.instantiate()
 
 	# Choose a random location on Path2D.
-	var mob_spawn_location = get_node("MobPath/MobSpawnLocation")
+	var mob_spawn_location = $MobPath/MobSpawnLocation
 	mob_spawn_location.progress_ratio = randf()
 
 	# Set the mob's direction perpendicular to the path direction.
@@ -54,3 +57,4 @@ func _on_start_timer_timeout():
 
 func _on_score_timer_timeout():
 	score += 10
+	$Hub.update_score(score)

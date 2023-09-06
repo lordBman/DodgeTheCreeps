@@ -5,7 +5,7 @@ var screen_size # Size of the game window.
 
 signal hit
 
-func start(pos):
+func start(pos: Vector2):
 	position = pos
 	show()
 	$CollisionShape2D.disabled = false
