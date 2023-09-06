@@ -13,9 +13,11 @@ func _process(delta):
 
 
 func game_over():
+	$Music.stop()
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 	$Hub.show_game_over()
+	$DeathSound.play()
 	
 func new_game():
 	score = 0
@@ -24,6 +26,7 @@ func new_game():
 	$Hub.update_score(score)
 	$Hub.show_message("Get Ready")
 	$StartTimer.start()
+	$Music.play()
 
 func _on_mob_timer_timeout():
 	# Create a new instance of the Mob scene.

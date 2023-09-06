@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7d6wuw8kxmx2"]
+[gd_scene load_steps=5 format=3 uid="uid://b7d6wuw8kxmx2"]
 
 [ext_resource type="Script" path="res://scripts/hub.gd" id="1_i6ubv"]
 [ext_resource type="FontFile" uid="uid://e1bukpluh6nb" path="res://fonts/Xolonium-Regular.ttf" id="2_5ote0"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_tsx08"]
+action = &"start"
+
+[sub_resource type="Shortcut" id="Shortcut_haklb"]
+events = [SubResource("InputEventAction_tsx08")]
 
 [node name="Hub" type="CanvasLayer"]
 script = ExtResource("1_i6ubv")
@@ -47,12 +53,13 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -83.5
 offset_top = -140.0
-offset_right = 116.5
-offset_bottom = -40.0
+offset_right = 36.5
+offset_bottom = -80.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("2_5ote0")
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 24
+shortcut = SubResource("Shortcut_haklb")
 text = "Start"
 
 [node name="MessageTimer" type="Timer" parent="."]
